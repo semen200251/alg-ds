@@ -2,14 +2,13 @@
 #pragma warning(disable:4996) 
 int main()
 {
-	char proverka[100];
 	LIST* current;
-	LIST* List_1 = (LIST*)malloc(sizeof(LIST));//; 
+	LIST* List_1 = (LIST*)malloc(sizeof(LIST));
 	if (List_1 == NULL)
 	{
 		return 1;
 	}
-	LIST* List_2 = (LIST*)malloc(sizeof(LIST));//; 
+	LIST* List_2 = (LIST*)malloc(sizeof(LIST));
 	if (List_2 == NULL)
 	{
 		return 2;
@@ -24,7 +23,7 @@ int main()
 	write(fp2, List_2);
 	if (List_2->data[0] == '\0')
 	{
-		LIST* List_3 = (LIST*)malloc(sizeof(LIST));//; 
+		LIST* List_3 = (LIST*)malloc(sizeof(LIST));
 		List_3 = List_2;
 		List_2 = List_1;
 		List_1 = List_3;

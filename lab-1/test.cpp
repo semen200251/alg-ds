@@ -13,7 +13,7 @@ TEST(write, normal) {
 }
 
 TEST(write, EmptyFile) {
-	FILE* fp2 = fopen("test2.txt", "r");
+	FILE* fp2 = fopen("test6.txt", "r");
 	LIST* Test2 = (LIST*)malloc(sizeof(LIST));
 	write(fp2, Test2);
 	ASSERT_EQ(Test2->data[0], '\0');
@@ -51,7 +51,7 @@ TEST(merge, normal) {
 }
 
 TEST(merge, EmptyList1) {
-	FILE* fp1 = fopen("test2.txt", "r");
+	FILE* fp1 = fopen("test6.txt", "r");
 	FILE* fp2 = fopen("test32.txt", "r");
 	LIST* Test1 = (LIST*)malloc(sizeof(LIST));
 	LIST* Test2 = (LIST*)malloc(sizeof(LIST));
@@ -65,7 +65,7 @@ TEST(merge, EmptyList1) {
 }
 
 TEST(merge, EmptyList2) {
-	FILE* fp1 = fopen("test2.txt", "r");
+	FILE* fp1 = fopen("test6.txt", "r");
 	FILE* fp2 = fopen("test32.txt", "r");
 	LIST* Test1 = (LIST*)malloc(sizeof(LIST));
 	LIST* Test2 = (LIST*)malloc(sizeof(LIST));
