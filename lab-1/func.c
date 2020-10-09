@@ -196,6 +196,7 @@ int free_list(LIST* List)
 {
 	LIST* prew;
 	LIST* current;
+	int status = 0;
 	current = List->next;
 	prew = List;
 	while (current != NULL)
@@ -203,6 +204,11 @@ int free_list(LIST* List)
 		free(prew);
 		prew = current;
 		current = current->next;
+		status = 1;
+	}
+	if (status == 0)
+	{
+		free(prew);
 	}
 	return 0;
 }

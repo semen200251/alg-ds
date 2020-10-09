@@ -24,12 +24,12 @@ TEST(write, SameStr) {
 	FILE* fp = fopen("test3.txt", "r");
 	LIST* Test = (LIST*)malloc(sizeof(LIST));
 	write(fp, Test);
-	ASSERT_EQ(strcmp(Test->data, "arbuz\n"), 0);
-	ASSERT_EQ(strcmp(Test->next->data, "banan\n"), 0);
-	ASSERT_EQ(strcmp(Test->next->next->data, "banan\n"), 0);
-	ASSERT_EQ(strcmp(Test->next->next->next->data, "coc\n"), 0);
-	ASSERT_EQ(strcmp(Test->next->next->next->next->data, "prikol\n"), 0);
-	ASSERT_EQ(strcmp(Test->next->next->next->next->next->data, "prikol\n"), 0);
+	ASSERT_EQ(strcmp(Test->data, "afas\n"), 0);
+	ASSERT_EQ(strcmp(Test->next->data, "afas\n"), 0);
+	ASSERT_EQ(strcmp(Test->next->next->data, "gdsg\n"), 0);
+	ASSERT_EQ(strcmp(Test->next->next->next->data, "gdsg\n"), 0);
+	ASSERT_EQ(strcmp(Test->next->next->next->next->data, "gdsh\n"), 0);
+	ASSERT_EQ(strcmp(Test->next->next->next->next->next->data, "tew\n"), 0);
 	free_list(Test);
 }
 
@@ -149,3 +149,4 @@ TEST(merge, SameStr) {
 	free_list(Test2);
 	free_list(Test3);
 }
+
