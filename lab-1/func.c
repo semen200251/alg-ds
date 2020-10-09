@@ -7,7 +7,7 @@ int write(FILE* fp, LIST* List)
 	int count_runs = 0;
 	LIST* current;
 	LIST* prew;
-	while (fgets(reade, 100, fp) != NULL)
+	while (fgets(reade, word_length, fp) != NULL)
 		{
 			int longl = strlen(reade);
 			if (count_runs == 0)
@@ -24,7 +24,7 @@ int write(FILE* fp, LIST* List)
 				LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
 				if (NewBlock == NULL)
 				{
-					return -1;
+					return problem;
 				}
 				while (current != NULL && strcmp(current->data, reade) < 0)
 				{
@@ -64,57 +64,131 @@ int write(FILE* fp, LIST* List)
 	return 0;
 }
 
-int merger(LIST* List1, LIST* List2)
+int merger(LIST* List1, LIST* List2, LIST* List3)
 {
 	LIST* current_List2;
 	LIST* prev_List2;
 	LIST* current_List1;
+	LIST* current_List3;
+	LIST* prev_List1;
+	LIST* prev_List3;
 	current_List1 = List1;
-	while (current_List1 != NULL)
+	current_List2 = List2;
+	current_List3 = List3;
+	while (current_List1 != NULL && current_List2 != NULL)
 	{
-		if (current_List1->data[0] != '\0')
+		LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
+		current_List3->next = NewBlock;
+		if (strcmp(current_List1->data, current_List2->data) < 0 && current_List1->data[0] != '\0')
 		{
-			char auxiliary_array[100];
-			LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
-			current_List2 = List2;
-			prev_List2 = current_List2;
-			if (current_List2->data[0] == '\0')
+			for (int i = 0; i < word_length; i++)
 			{
-				List2 = List1;
-				break;
+				current_List3->data[i] = current_List1->data[i];
 			}
-			while (current_List2 != NULL && strcmp(current_List2->data, current_List1->data) < 0)
+			current_List1 = current_List1->next;
+			current_List3->next = NewBlock;
+			current_List3 = current_List3->next;
+		}
+		else if (strcmp(current_List1->data, current_List2->data) > 0 && current_List2->data[0] != '\0')
+		{
+			for (int i = 0; i < word_length; i++)
 			{
-				prev_List2 = current_List2;
-				current_List2 = current_List2->next;
+				current_List3->data[i] = current_List2->data[i];
 			}
-			for (unsigned int i = 0; i < strlen(current_List1->data); i++)
+			current_List2 = current_List2->next;
+			current_List3->next = NewBlock;
+			current_List3 = current_List3->next;
+		}
+		else if (strcmp(current_List1->data, current_List2->data) == 0)
+		{
+			for (int i = 0; i < word_length; i++)
 			{
-				NewBlock->data[i] = current_List1->data[i];
+				current_List3->data[i] = current_List2->data[i];
 			}
-			NewBlock->data[strlen(current_List1->data)] = '\0';
-			if (current_List2 == List2)
+			current_List2 = current_List2->next;
+			current_List3->next = NewBlock;
+			current_List3 = current_List3->next;
+			for (int i = 0; i < word_length; i++)
 			{
-
-				for (unsigned int i = 0; i < strlen(current_List1->data); i++)
+				current_List3->data[i] = current_List1->data[i];
+			}
+			current_List1 = current_List1->next;
+			LIST* NewBlock2 = (LIST*)malloc(sizeof(LIST));
+			current_List3->next = NewBlock2;
+			current_List3 = current_List3->next;
+		}
+		if (current_List1 != NULL&& current_List2 != NULL)
+		{
+			if (current_List1->data[0] == '\0')
+			{
+				while (current_List2 != NULL)
 				{
-					auxiliary_array[i] = List2->data[i];
-					List2->data[i] = NewBlock->data[i];
-					NewBlock->data[i] = auxiliary_array[i];
+					LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
+					for (int i = 0; i < word_length; i++)
+					{
+						current_List3->data[i] = current_List2->data[i];
+					}
+					current_List2 = current_List2->next;
+					current_List3->next = NewBlock;
+					current_List3 = current_List3->next;
 					
 				}
-				NewBlock->next = List2->next;
-				List2->next = NewBlock;
+				current_List3->next = NULL;
+				return 0;
 			}
-			else {
-				NewBlock->next = current_List2;
-				prev_List2->next = NewBlock;
-
+			if (current_List2 != NULL)
+			{
+				if (current_List2->data[0] == '\0')
+				{
+					while (current_List1 != NULL)
+					{
+						LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
+						for (int i = 0; i < word_length; i++)
+						{
+							current_List3->data[i] = current_List1->data[i];
+						}
+						current_List1 = current_List1->next;
+						current_List3->next = NewBlock;
+						current_List3 = current_List3->next;
+					}
+					current_List3->next = NULL;
+					return 0;
+				}
 			}
 		}
+		//prev_List3 = current_List3;
+		//current_List3->next = NewBlock;
+		//current_List3 = current_List3->next;
+	}
+	if (current_List1 != NULL)
+	{
+		while (current_List1 != NULL)
+		{
+			for (int i = 0; i < word_length; i++)
+			{
+				current_List3->data[i] = current_List1->data[i];
+			}
 			current_List1 = current_List1->next;
+			LIST* NewBlock = (LIST*)malloc(sizeof(LIST));
+			current_List3->next = NewBlock;
+			current_List3 = current_List3->next;
 		}
-
+		current_List3->next = NULL;
+		return 0;
+	}
+	else if (current_List2 != NULL)
+	{
+		if (current_List2 != NULL)
+		{
+			for (int i = 0; i < word_length; i++)
+			{
+				current_List3->data[i] = current_List2->data[i];
+			}
+			current_List3->next = NULL;
+			return 0;
+		}
+	}
+	current_List3->next = NULL;
 	return 0;
 }
 

@@ -6,12 +6,17 @@ int main()
 	LIST* List_1 = (LIST*)malloc(sizeof(LIST));
 	if (List_1 == NULL)
 	{
-		return 1;
+		return problem;
 	}
 	LIST* List_2 = (LIST*)malloc(sizeof(LIST));
 	if (List_2 == NULL)
 	{
-		return 2;
+		return problem;
+	}
+	LIST* List_3 = (LIST*)malloc(sizeof(LIST));
+	if (List_3 == NULL)
+	{
+		return problem;
 	}
 	FILE* fp1;
 	fp1 = fopen("name1.txt", "r");
@@ -21,16 +26,9 @@ int main()
 	fp3 = fopen("name3.txt", "w");
 	write(fp1, List_1);
 	write(fp2, List_2);
-	if (List_2->data[0] == '\0')
-	{
-		LIST* List_3 = (LIST*)malloc(sizeof(LIST));
-		List_3 = List_2;
-		List_2 = List_1;
-		List_1 = List_3;
-	}
-	merger(List_1, List_2);
-	current = List_2;
-	while (current != NULL)
+	merger(List_1, List_2,List_3);
+	current = List_3;
+	while (current->next != NULL)
 	{
 		fputs(current->data, fp3);
 		current = current->next;
