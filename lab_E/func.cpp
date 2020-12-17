@@ -82,16 +82,16 @@ LIST* find_data(char data[], LIST* current)
 {
     while (current != NULL)
     {
-        if (current->data == data)
+        if (strcmp(current->data, data)==0)
         {
             return current;
         }
-        else if (current->data > data)
+        else if (strcmp(current->data, data)>0)
         {
             current = current->left;
             continue;
         }
-        else if (current->data < data)
+        else if (strcmp(current->data, data)<0)
         {
             current = current->right;
             continue;
