@@ -4,7 +4,7 @@
 #include <string.h>
 #pragma warning(disable:4996)
 typedef struct LIST {
-    int data;
+    char data[100];
     struct LIST* left;
     struct LIST* right;
     struct LIST* parent;
