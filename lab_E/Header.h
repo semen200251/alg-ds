@@ -11,19 +11,19 @@ typedef struct LIST {
 } LIST;
 
 
-LIST* add_block(LIST* parent, int data);
+LIST* add_block(LIST* parent, char data[]);
 
-void insert_in_tree(int data);
+void insert_in_tree(char data[]);
 
 LIST* find_min(LIST* current);
 
 LIST* find_max(LIST* current);
 
-LIST* find_data(int data, LIST* current);
+LIST* find_data(char data[], LIST* current);
 
 void delete_block(LIST* current);
 
-void deleteValue(LIST* root, int value);
+void deleteValue(LIST* root, char value[]);
 
 void printTree(LIST* root, const char* dir, int level);
 
