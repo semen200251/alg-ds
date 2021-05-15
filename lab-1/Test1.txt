@@ -1,4 +1,0 @@
-coc
-arbuz
-banan
-prikol
